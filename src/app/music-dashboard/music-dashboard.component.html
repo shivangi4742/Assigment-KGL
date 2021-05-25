@@ -1,0 +1,49 @@
+<div class="page-content">
+    <div class="header">
+      <div class="header-text">music </div>
+      <!-- <div class="header-image"><img src="assets/music_icon_136371.png" alt="cocktail"></div> -->
+    </div>
+    <div class="main">
+      <div class="filter">
+        <div class="container">
+          <div class="card mr-20">
+            <mat-form-field class="example-full-width">
+              <mat-label>Search Text</mat-label>
+              <input matInput placeholder="Enter text to search"  id="searchText">
+            </mat-form-field>
+            <button mat-button name="search" (click)="search()">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf='storageService.isLoader === true;'>
+        <mat-spinner strokeWidth='100'></mat-spinner>
+      </div>
+      <div class="content">
+        <div *ngIf="filteredMusicData && filteredMusicData.length>0">
+          <mat-grid-list cols='4' rowHeight='3:5' gutterSize='5vw' style="width: 70vw">
+            <mat-grid-tile *ngFor="let m of filteredMusicData">
+              <mat-card>
+                <div class="mat-card-img-container">
+                  <img class="mat-card-img" mat-card-sm-image src="assets/thumbnail.png" alt="">
+                </div>
+                <mat-card-content>
+                  <div class="title"> {{m.title}} </div>
+                  <div class="timeduration">{{m.supplement_information[0]}}</div>
+                  <div class= "description" [innerHTML]="m.description"> </div>
+                  <div *ngFor="let links of m.links " class="verticlealign pointer">
+                    <div *ngIf="links.target_type ==='file'; else elsestatement;" class="txtunderLine"> {{links.text}}</div>
+                    <ng-template #elsestatement><span class="material-icons">play_circle_filled</span>{{links.text}}</ng-template>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        <div *ngIf="filteredMusicData && filteredMusicData.length===0">
+           <h2>oops! Music data not found</h2>
+        </div>
+      </div>
+    </div>
+  
+  </div>
