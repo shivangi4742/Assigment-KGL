@@ -12,7 +12,7 @@ export class MusicDashboardComponent implements OnInit {
   musicData: any;
   filteredMusicData= [];
   searchText: string;
-  constructor(private apiservice: ApiService, private storageService: StorageService) { }
+  constructor(private apiservice: ApiService, public storageService: StorageService) { }
 
   ngOnInit(): void {
     this.loadMusic();
