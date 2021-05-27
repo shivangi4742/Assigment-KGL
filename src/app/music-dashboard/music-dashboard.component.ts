@@ -28,7 +28,6 @@ export class MusicDashboardComponent implements OnInit {
     let filteredArr: any = []
     if(searchText) {
       filters.forEach((t: any) => {
-        console.log(t)
        if (t.keywords.includes(searchText) || t.title.toLowerCase().includes(searchText)
         || t.description.includes(searchText)) {
          filteredArr.push(t);
@@ -38,6 +37,7 @@ export class MusicDashboardComponent implements OnInit {
     } else {
       this.filteredMusicData = this.musicData;
     }
+    console.log(this.filteredMusicData)
 		}
 
 		loadMusic(): void {
